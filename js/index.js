@@ -6,7 +6,7 @@ var app = new Vue({
     },
     methods: {
         create: function () {
-            if (this.newItem) {
+            if (this.newItem.Content) {
                 this.items.unshift(this.newItem);
                 this.newItem = {};
             }
