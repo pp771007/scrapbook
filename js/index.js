@@ -2,20 +2,20 @@ var app = new Vue({
     el: '#app',
     data: {
         items: [],
-        newItem: "",
+        newItem: {},
     },
     methods: {
         create: function () {
             if (this.newItem) {
-                this.items.push(this.newItem);
-                this.newItem = "";
+                this.items.unshift(this.newItem);
+                this.newItem = {};
             }
         },
         remove: function (index) {
             this.items.splice(index, 1);
         },
         copy: function (index) {
-            copyDisabledTextToClipboard("#item" + index);
+            copyDisabledTextToClipboard("#item-content-" + index);
         }
     },
     mounted: function () {
