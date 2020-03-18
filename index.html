@@ -17,11 +17,11 @@
             <div v-for="(item, index) in items" class="col-lg-4 col-md-6">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <button class="btn btn-danger" @click="remove(index)">刪除</button>
+                        <button class="btn btn-info" @click="copy(index)">Copy</button>
                     </div>
                     <input type="text" class="form-control" v-model="item.Title" placeholder="標題">
                     <div class="input-group-append">
-                        <button class="btn btn-info" @click="copy(index)">複製</button>
+                        <button class="btn btn-danger" @click="remove(index)">X</button>
                     </div>
                 </div>
                 <textarea class="form-control" v-model="item.Content" v-bind:id="'item-content-'+ index"></textarea>
