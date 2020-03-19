@@ -7,7 +7,10 @@
 </head>
 <body>
     <div id="app" class="container-fluid">
-        <div class="row justify-content-center" style="margin: 10px 0">
+        <div class="row" style="margin: 10px 0">
+            <div class="col-3">
+                <input type="color" v-model="bgColor" @change="changeBgColor()" />
+            </div>
             <div class="col-6">
                 <textarea id="newItem" v-model="newItem.Content" @blur="create()" class="form-control" placeholder="請輸入內容，輸入後點擊其他區域新增。"></textarea>
             </div>

@@ -3,6 +3,7 @@ var app = new Vue({
     data: {
         items: [],
         newItem: {},
+        bgColor: "#000000"
     },
     methods: {
         create: function () {
@@ -16,12 +17,24 @@ var app = new Vue({
         },
         copy: function (index) {
             copyDisabledTextToClipboard("#item-content-" + index);
+        },
+        changeBgColor: function () {
+            document.body.style.backgroundColor = this.bgColor;
+            localStorage.setItem("bgColor", this.bgColor);
         }
     },
     mounted: function () {
         var items = localStorage.getItem("items");
-        if (items == null || items == undefined) { return; }
-        this.items = JSON.parse(items);
+        if (items) {
+            this.items = JSON.parse(items);
+        }
+
+        var bgColor = localStorage.getItem("bgColor");
+        if (bgColor) {
+            this.bgColor = bgColor;
+            document.body.style.backgroundColor = this.bgColor;
+        }
+        
     },
     updated: function () {
         var str = JSON.stringify(this.items);
