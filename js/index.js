@@ -3,7 +3,9 @@ var app = new Vue({
     data: {
         items: [],
         newItem: {},
-        bgColor: "#000000"
+        settings: {
+            bgColor: "#000000"
+        }
     },
     methods: {
         create: function () {
@@ -19,26 +21,34 @@ var app = new Vue({
             copyDisabledTextToClipboard("#item-content-" + index);
         },
         changeBgColor: function () {
-            document.body.style.backgroundColor = this.bgColor;
-            localStorage.setItem("bgColor", this.bgColor);
+            document.body.style.backgroundColor = this.settings.bgColor;
         }
     },
-    mounted: function () {
+    created: function () {
         var items = localStorage.getItem("items");
         if (items) {
             this.items = JSON.parse(items);
         }
 
-        var bgColor = localStorage.getItem("bgColor");
-        if (bgColor) {
-            this.bgColor = bgColor;
-            document.body.style.backgroundColor = this.bgColor;
+        var settings = localStorage.getItem("settings");
+        if (settings) {
+            this.settings = JSON.parse(settings);
         }
+        this.changeBgColor();
         
     },
-    updated: function () {
-        var str = JSON.stringify(this.items);
-        localStorage.setItem("items", str);
+    watch: {
+        items: function(value) {
+            var str = JSON.stringify(value);
+            localStorage.setItem("items", str);
+        },
+        settings: {
+            handler(value) {
+                var str = JSON.stringify(value);
+                localStorage.setItem("settings", str);
+            },
+            deep: true
+        }
     }
 });
 
