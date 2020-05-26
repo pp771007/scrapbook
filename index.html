@@ -13,8 +13,10 @@
                 <input type="color" v-model="settings.bgColor" @change="changeBgColor()" />
             </div>
             <div class="col-6">
+                <!--多行模式-->
                 <textarea v-if="settings.template == 'A'" v-model="newItem.Content" @blur="create()" class="form-control" placeholder="請輸入內容，輸入後點擊其他區域新增。"></textarea>
-                <input v-if="settings.template == 'B'" v-model="newItem.Content" @blur="create()" class="form-control" placeholder="請輸入內容，輸入後點擊其他區域新增。" />
+                <!--單行模式-->
+                <input v-if="settings.template == 'B'" v-model="newItem.Content" v-on:keyup.enter="create()" @blur="create()" class="form-control" placeholder="請輸入內容，輸入後按Enter或點擊其他區域新增。" />
             </div>
             <div class="col-3 text-right">
                 <select v-model="settings.template">
@@ -24,6 +26,7 @@
             </div>
         </div>
 
+        <!--多行模式-->
         <div class="row" v-if="settings.template == 'A'">
             <div v-for="(item, index) in items" class="col-lg-4 col-md-6 pt-2">
                 <div class="input-group">
@@ -39,6 +42,7 @@
             </div>
         </div>
 
+        <!--單行模式-->
         <div v-if="settings.template == 'B'">
             <div class="input-group mb-1" v-for="(item, index) in items">
                 <input type="text" class="form-control" v-model="item.Title" style="max-width:20%" placeholder="標題">
