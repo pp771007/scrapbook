@@ -13,22 +13,40 @@
                 <input type="color" v-model="settings.bgColor" @change="changeBgColor()" />
             </div>
             <div class="col-6">
-                <textarea id="newItem" v-model="newItem.Content" @blur="create()" class="form-control" placeholder="請輸入內容，輸入後點擊其他區域新增。"></textarea>
+                <textarea v-if="settings.template == 'A'" v-model="newItem.Content" @blur="create()" class="form-control" placeholder="請輸入內容，輸入後點擊其他區域新增。"></textarea>
+                <input v-if="settings.template == 'B'" v-model="newItem.Content" @blur="create()" class="form-control" placeholder="請輸入內容，輸入後點擊其他區域新增。" />
+            </div>
+            <div class="col-3 text-right">
+                <select v-model="settings.template">
+                    <option value="A">多行模式</option>
+                    <option value="B">單行模式</option>
+                </select>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" v-if="settings.template == 'A'">
             <div v-for="(item, index) in items" class="col-lg-4 col-md-6 pt-2">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <button class="btn btn-info" @click="copy(index)">Copy</button>
+                        <button class="btn btn-info" @click="copy('item-content-A-'+ index)">Copy</button>
                     </div>
                     <input type="text" class="form-control" v-model="item.Title" placeholder="標題">
                     <div class="input-group-append">
                         <button class="btn btn-danger" @click="remove(index)">X</button>
                     </div>
                 </div>
-                <textarea class="form-control" v-model="item.Content" v-bind:id="'item-content-'+ index"></textarea>
+                <textarea class="form-control" v-model="item.Content" v-bind:id="'item-content-A-'+ index"></textarea>
+            </div>
+        </div>
+
+        <div v-if="settings.template == 'B'">
+            <div class="input-group mb-1" v-for="(item, index) in items">
+                <input type="text" class="form-control" v-model="item.Title" style="max-width:20%" placeholder="標題">
+                <input type="text" class="form-control" v-model="item.Content" v-bind:id="'item-content-B-'+ index">
+                <div class="input-group-append">
+                    <button class="btn btn-info" @click="copy('item-content-B-'+ index)">Copy</button>
+                    <button class="btn  btn-danger" type="button" @click="remove(index)">X</button>
+                </div>
             </div>
         </div>
     </div>

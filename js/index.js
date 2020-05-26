@@ -4,7 +4,8 @@ var app = new Vue({
         items: [],
         newItem: {},
         settings: {
-            bgColor: "#000000"
+            bgColor: "#000000",
+            template: "A"
         }
     },
     methods: {
@@ -17,8 +18,8 @@ var app = new Vue({
         remove: function (index) {
             this.items.splice(index, 1);
         },
-        copy: function (index) {
-            copyDisabledTextToClipboard("#item-content-" + index);
+        copy: function (id) {
+            copyDisabledTextToClipboard("#" + id);
         },
         changeBgColor: function () {
             document.body.style.backgroundColor = this.settings.bgColor;
