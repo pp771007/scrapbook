@@ -5,7 +5,8 @@ var app = new Vue({
         newItem: {},
         settings: {
             bgColor: "#000000",
-            template: "A"
+            template: "A",
+            titleWidth: 20
         }
     },
     methods: {

@@ -44,8 +44,11 @@
 
         <!--單行模式-->
         <div v-if="settings.template == 'B'">
+            <div>
+                <input type="range" v-model="settings.titleWidth" min="1" max="50" />
+            </div>
             <div class="input-group mb-1" v-for="(item, index) in items">
-                <input type="text" class="form-control" v-model="item.Title" style="max-width:20%" placeholder="標題">
+                <input type="text" class="form-control" v-model="item.Title" v-bind:style="{maxWidth: settings.titleWidth + '%'}" placeholder="標題">
                 <input type="text" class="form-control" v-model="item.Content" v-bind:id="'item-content-B-'+ index">
                 <div class="input-group-append">
                     <button class="btn btn-info" @click="copy('item-content-B-'+ index)">Copy</button>
