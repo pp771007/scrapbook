@@ -19,10 +19,7 @@
                 <input v-if="settings.template == 'B'" v-model="newItem.Content" v-on:keyup.enter="create()" @blur="create()" class="form-control" placeholder="請輸入內容，輸入後按Enter或點擊其他區域新增。" />
             </div>
             <div class="col-3 text-right">
-                <select v-model="settings.template">
-                    <option value="A">多行模式</option>
-                    <option value="B">單行模式</option>
-                </select>
+                <button type="button" @click="changeTemplate()">{{getTemplateName()}}</button>
             </div>
         </div>
 

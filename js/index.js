@@ -24,6 +24,22 @@ var app = new Vue({
         },
         changeBgColor: function () {
             document.body.style.backgroundColor = this.settings.bgColor;
+        },
+        changeTemplate: function () {
+            if (this.settings.template == "A") {
+                this.settings.template = "B";
+            }
+            else {
+                this.settings.template = "A";
+            }
+        },
+        getTemplateName: function () {
+            if (this.settings.template == "A") {
+                return "多行模式";
+            }
+            else {
+                return "單行模式";
+            }
         }
     },
     created: function () {
@@ -37,7 +53,7 @@ var app = new Vue({
             this.settings = JSON.parse(settings);
         }
         this.changeBgColor();
-        
+
     },
     watch: {
         settings: {
