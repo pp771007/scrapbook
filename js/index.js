@@ -40,14 +40,17 @@ var app = new Vue({
         
     },
     watch: {
-        items: function(value) {
-            var str = JSON.stringify(value);
-            localStorage.setItem("items", str);
-        },
         settings: {
             handler(value) {
                 var str = JSON.stringify(value);
                 localStorage.setItem("settings", str);
+            },
+            deep: true
+        },
+        items: {
+            handler(value) {
+                var str = JSON.stringify(value);
+                localStorage.setItem("items", str);
             },
             deep: true
         }
